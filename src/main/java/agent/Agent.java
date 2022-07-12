@@ -16,6 +16,9 @@ public class Agent {
 
     public int select(GameState state) {
         //TODO make the agent select based on memory or other variables, for now selects the first door always
+
+        double[] memSnap = memory.get();
+
         return 0;
     }
 

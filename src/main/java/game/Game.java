@@ -13,7 +13,17 @@ public class Game {
     }
 
     public void start() {
+        final int initSteps = 100;
         final int steps = 100;
+
+
+        for (int step = 0; step < initSteps; step++) {
+            final int selectedDoorIndx = step % states.doorCount;
+//            final int selectedDoorIndx = agent.select(states.current());
+            final boolean result = evaluate(selectedDoorIndx);
+            agent.updateMemory(selectedDoorIndx, result);
+            states.next();
+        }
 
         for (int step = 0; step < steps; step++) {
             final int selectedDoorIndx = agent.select(states.current());
