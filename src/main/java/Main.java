@@ -1,27 +1,20 @@
 import java.util.Arrays;
 
 import agent.Agent;
-import agent.memory.CountingMemory;
-import agent.memory.EpsilonMemory;
+import agent.Memory;
 import game.Game;
-import game.state.SimpleStateGenerator;
-import game.state.StateGenerator;
-import agent.memory.Memory;
+import game.DoorController;
 
 public class Main {
     public static void main(String[] args) {
 
-        final int doorsCount = 3;
-
-        final Memory agentMem = new EpsilonMemory(doorsCount);
-        final Agent agent = new Agent(doorsCount, agentMem);
-        final StateGenerator stateGenerator = new SimpleStateGenerator(doorsCount);
-        final Game game = new Game(stateGenerator, agent);
-
-        Arrays.stream(agentMem.get()).forEach(prob -> {
-            System.out.println(prob);
-        });
+        final Memory mem = new Memory();
+        final Agent agent = new Agent(mem);
+        final DoorController doorController = new DoorController();
+        final Game game = new Game(doorController, agent);
 
         game.start();
+
+        Arrays.stream(game.selections).forEach(System.out::println);
     }
 }
