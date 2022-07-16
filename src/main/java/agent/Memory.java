@@ -8,10 +8,14 @@ import java.util.ArrayList;
 
 public class Memory {
     public Window probWindow = new Window(new ArrayList<>());
-    private final double epsilon = 0.001;
+    private static final double epsilon = 0.01;
 
     public void reset(Window newWindow) {
-        this.probWindow = newWindow;
+        final ArrayList<Door> doors = new ArrayList<>();
+        for(Door door : newWindow.doors) {
+            doors.add(new Door(door.number, 1.0/3));
+        }
+        this.probWindow = new Window(doors);
     }
 
     public void updateMem(Result result) {
@@ -31,5 +35,7 @@ public class Memory {
             }
         }
     }
+
+
 
 }
