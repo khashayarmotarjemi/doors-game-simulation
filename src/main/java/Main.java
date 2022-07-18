@@ -20,7 +20,6 @@ public class Main {
         game.start();
 
 
-//         Plot plot = new Plot();
 //        plot.pack();
 //        plot.setVisible(true);
 
