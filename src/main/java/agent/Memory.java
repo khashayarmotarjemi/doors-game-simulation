@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Memory {
     public Window probWindow = new Window(new ArrayList<>());
-    private static final double epsilon = 0.01;
+    private static final double epsilon = 1.0/6;
 
     public void reset(Window newWindow) {
         final ArrayList<Door> doors = new ArrayList<>();
@@ -28,9 +28,9 @@ public class Memory {
                 }
             } else {
                 if (result.won) {
-                    door.probability -= epsilon / 4;
+                    door.probability -= epsilon / 2;
                 } else {
-                    door.probability += epsilon / 4;
+                    door.probability += epsilon / 2;
                 }
             }
         }

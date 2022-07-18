@@ -1,20 +1,21 @@
 package game;
 
 import agent.Agent;
+import agent.Counter;
 
 public class Game {
     private final Agent agent;
     private final DoorController doorCtrl;
-    public final int[] selections;
+    public final Counter counter;
 
-    public Game(DoorController controller, Agent agent) {
+    public Game(DoorController controller, Agent agent, Counter counter) {
         this.agent = agent;
         this.doorCtrl = controller;
-        this.selections = new int[]{0, 0, 0, 0, 0};
+        this.counter = counter;
     }
 
     public void start() {
-        final int inspectionSteps = 10;
+        final int inspectionSteps = 100;
         final int rounds = 100;
 
         for (int round = 0; round < rounds; round++) {
@@ -29,7 +30,7 @@ public class Game {
             }
 
             final Door chosenDoor = agent.select();
-            selections[chosenDoor.number - 1]++;
+            counter.addDoor(chosenDoor.number - 1);
         }
     }
 }

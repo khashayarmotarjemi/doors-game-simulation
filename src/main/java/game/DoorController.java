@@ -1,31 +1,25 @@
 package game;
 
 import agent.Window;
-import agent.WindowCounter;
+import agent.Counter;
+import helper.Nudging;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoorController {
-    final int k;
-    final int l;
-    final WindowCounter counter;
-    final ArrayList<Double> windowProbs = new ArrayList<>();
+    final Counter counter;
     int step = 0;
+    final private Nudging nudging;
     Window window;
     private final Door[] allDoors;
     private final ArrayList<Window> windows = new ArrayList<>();
 
-    public DoorController(int k, int l, WindowCounter counter) {
-        this.k = k;
-        this.l = l;
+    public DoorController(Counter counter, Nudging nudging) {
+        this.nudging = nudging;
+        nudging.updateProbs();
         this.counter = counter;
-
-        double x = (double) 1 / (k*l + k + 1);
-
-        windowProbs.add(l * k * x);
-        windowProbs.add(k * x);
-        windowProbs.add(x);
 
         allDoors = new Door[]{
                 new Door(1, 0.27),
@@ -53,13 +47,15 @@ public class DoorController {
     }
 
     public void resetWindow() {
+        final ArrayList<Double> windowProbs = nudging.windowProbs;
+
         double rnd = Math.random();
 
         if (rnd < windowProbs.get(2)) {
             this.window = windows.get(3);
-            counter.add(2);
+            counter.addWindow(2);
         } else if (rnd < windowProbs.get(1)) {
-            counter.add(1);
+            counter.addWindow(1);
 
             if (Math.random() < 0.5) {
                 this.window = windows.get(2);
@@ -67,14 +63,16 @@ public class DoorController {
                 this.window = windows.get(1);
             }
         } else {
-            counter.add(0);
+            counter.addWindow(0);
 
             this.window = windows.get(0);
         }
+        counter.addDoorFreq(this.window);
+
     }
 
     public boolean evaluate(int doorNo) {
-        return Math.random() < allDoors[doorNo - 1]. probability;
+        return Math.random() < allDoors[doorNo - 1].probability;
     }
 }
 

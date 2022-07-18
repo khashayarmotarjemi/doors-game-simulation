@@ -19,12 +19,4 @@ public class Window {
     public Window(ArrayList<Door> doors) {
         this.doors = doors;
     }
-
-/*    boolean hasDoor(int doorNo) {
-
-    }*/
-/*
-    public ArrayList<Door> cut(ArrayList<Door> doors) {
-
-    }*/
 }
