@@ -14,16 +14,16 @@ public class Game {
         this.counter = counter;
     }
 
-    public void start() {
-        final int inspectionSteps = 100;
-        final int rounds = 100;
+    public void start(int inspection, int rounds) {
+//        final int inspectionSteps = 20;
+//        final int rounds = 100;
 
         for (int round = 0; round < rounds; round++) {
             doorCtrl.resetWindow();
             final GameState state = doorCtrl.getState();
             agent.reset(state.window);
 
-            for (int step = 0; step < inspectionSteps; step++) {
+            for (int step = 0; step < inspection; step++) {
                 final Door randomDoor = agent.randomSelect();
                 final boolean won = doorCtrl.evaluate(randomDoor.number);
                 agent.updateMemory(new Result(won, randomDoor.number));

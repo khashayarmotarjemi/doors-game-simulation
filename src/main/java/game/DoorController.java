@@ -10,7 +10,6 @@ import java.util.List;
 
 public class DoorController {
     final Counter counter;
-    int step = 0;
     final private Nudging nudging;
     Window window;
     private final Door[] allDoors;
@@ -18,7 +17,6 @@ public class DoorController {
 
     public DoorController(Counter counter, Nudging nudging) {
         this.nudging = nudging;
-        nudging.updateProbs();
         this.counter = counter;
 
         allDoors = new Door[]{
@@ -49,26 +47,43 @@ public class DoorController {
     public void resetWindow() {
         final ArrayList<Double> windowProbs = nudging.windowProbs;
 
-        double rnd = Math.random();
+        int i = pickByProbs(windowProbs);
 
-        if (rnd < windowProbs.get(2)) {
-            this.window = windows.get(3);
-            counter.addWindow(2);
-        } else if (rnd < windowProbs.get(1)) {
-            counter.addWindow(1);
-
-            if (Math.random() < 0.5) {
-                this.window = windows.get(2);
-            } else {
-                this.window = windows.get(1);
-            }
-        } else {
-            counter.addWindow(0);
-
-            this.window = windows.get(0);
+        while (i == -1) {
+            i = pickByProbs(windowProbs);
         }
+
+        counter.addWindow(i);
+
+        if (i == 0) {
+            this.window = windows.get(0);
+        } if (i == 1) {
+            if (Math.random() < 0.5) {
+                this.window = windows.get(1);
+            } else {
+                this.window = windows.get(2);
+            }
+        } else if (i == 2) {
+            this.window = windows.get(3);
+        }
+
         counter.addDoorFreq(this.window);
 
+    }
+
+    private int pickByProbs(ArrayList<Double> probs) {
+        double rnd = Math.random();
+        int i = 0;
+//        double p = Math.random();
+        double cumulativeProbability = 0.0;
+        for (Double prob : probs) {
+            cumulativeProbability += prob;
+            if (rnd <= cumulativeProbability) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 
     public boolean evaluate(int doorNo) {

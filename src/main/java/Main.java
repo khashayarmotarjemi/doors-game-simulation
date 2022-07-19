@@ -1,35 +1,21 @@
-import java.util.Arrays;
-
-import agent.Agent;
-import agent.Memory;
 import agent.Counter;
-import game.Game;
-import game.DoorController;
 import helper.Nudging;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         final Counter counter = new Counter();
         final Nudging nudging = new Nudging();
 
-        final Memory mem = new Memory();
-        final Agent agent = new Agent(mem);
-        final DoorController doorController = new DoorController( counter, nudging);
-        final Game game = new Game(doorController, agent, counter);
+        final GameRunner runner = new GameRunner(counter, nudging);
 
-        game.start();
-
-
-//         Plot plot = new Plot();
-//        plot.pack();
-//        plot.setVisible(true);
-
-
-
-        Arrays.stream(counter.doorSelection).forEach(System.out::println);
-        System.out.println();
-        Arrays.stream(counter.doorFrequency).forEach(System.out::println);
-        System.out.println();
-        counter.print();
+        nudging.updateProbs(6,3);
+//        nudging.updateProbs(new ArrayList<>(
+//                Arrays.asList(0.333, 0.3333, 0.3333)));
+        runner.run(10, 100);
     }
+
+
 }

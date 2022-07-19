@@ -3,15 +3,12 @@ package agent;
 import java.util.Arrays;
 
 public class Counter {
-    public final int[] windowSelections;
-    public final int[] doorSelection;
-
-    public final int[] doorFrequency;
+    public int[] windowSelections;
+    public int[] doorSelection;
+    public int[] doorFrequency;
 
     public Counter() {
-        this.windowSelections = new int[]{0, 0, 0,};
-        this.doorSelection = new int[]{0, 0, 0, 0, 0};
-        this.doorFrequency = new int[]{0, 0, 0, 0, 0};
+        clear();
     }
 
     public void addWindow(int index) {
@@ -29,5 +26,11 @@ public class Counter {
 
     public void print() {
         Arrays.stream(windowSelections).forEach(System.out::println);
+    }
+
+    public void clear() {
+        this.windowSelections = new int[]{0, 0, 0,};
+        this.doorSelection = new int[]{0, 0, 0, 0, 0};
+        this.doorFrequency = new int[]{0, 0, 0, 0, 0};
     }
 }
