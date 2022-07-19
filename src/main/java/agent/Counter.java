@@ -1,36 +1,48 @@
 package agent;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Counter {
-    public int[] windowSelections;
-    public int[] doorSelection;
-    public int[] doorFrequency;
+    static public ArrayList<Integer> windowSelections = new ArrayList<>();
+    static public Map<Integer, ArrayList<Integer>> doorSelection = new HashMap<>();
+    static public ArrayList<Integer> doorFrequency = new ArrayList<>();
 
     public Counter() {
         clear();
     }
 
-    public void addWindow(int index) {
-        windowSelections[index]++;
-    }
-    public void addDoor(int index) {
-        doorSelection[index]++;
+    public static void addWindow(int index) {
+        windowSelections.set(index, windowSelections.get(index) + 1);
     }
 
-    public void addDoorFreq(Window window) {
+    public static void addSelection(Agent agent, int index) {
+        final ArrayList<Integer> row = doorSelection.get(agent.id);
+        row.set(index, row.get(index) + 1);
+    }
+
+    public static void addDoorFreq(Window window) {
         window.doors.forEach((door) -> {
-            doorFrequency[door.number-1]++;
+            doorFrequency.set(door.number - 1, doorFrequency.get(door.number - 1) + 1);
         });
     }
 
     public void print() {
-        Arrays.stream(windowSelections).forEach(System.out::println);
+        windowSelections.forEach(System.out::println);
     }
 
-    public void clear() {
-        this.windowSelections = new int[]{0, 0, 0,};
-        this.doorSelection = new int[]{0, 0, 0, 0, 0};
-        this.doorFrequency = new int[]{0, 0, 0, 0, 0};
+    public static void clear() {
+        windowSelections.clear();
+        doorSelection.clear();
+        doorFrequency.clear();
+
+        windowSelections.addAll(Arrays.asList(0, 0, 0));
+        doorFrequency.addAll(Arrays.asList(0, 0, 0, 0, 0));
+
+        for (int i = 0; i < 3; i++) {
+            doorSelection.put(i, new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0)));
+        }
     }
 }

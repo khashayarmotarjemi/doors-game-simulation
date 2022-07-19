@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoorController {
-    final Counter counter;
     final private Nudging nudging;
     Window window;
     private final Door[] allDoors;
     private final ArrayList<Window> windows = new ArrayList<>();
 
-    public DoorController(Counter counter, Nudging nudging) {
+    public DoorController(Nudging nudging) {
         this.nudging = nudging;
-        this.counter = counter;
 
         allDoors = new Door[]{
                 new Door(1, 0.27),
@@ -53,7 +51,7 @@ public class DoorController {
             i = pickByProbs(windowProbs);
         }
 
-        counter.addWindow(i);
+        Counter.addWindow(i);
 
         if (i == 0) {
             this.window = windows.get(0);
@@ -67,7 +65,7 @@ public class DoorController {
             this.window = windows.get(3);
         }
 
-        counter.addDoorFreq(this.window);
+        Counter.addDoorFreq(this.window);
 
     }
 

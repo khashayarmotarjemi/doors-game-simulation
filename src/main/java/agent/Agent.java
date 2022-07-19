@@ -4,9 +4,11 @@ import game.Result;
 import game.Door;
 
 public class Agent {
+    final int id;
     private final Memory memory;
 
-    public Agent(Memory memory) {
+    public Agent(int id, Memory memory) {
+        this.id = id;
         this.memory = memory;
     }
 
@@ -23,6 +25,9 @@ public class Agent {
                 }
             }
         }
+        assert bestOption != null;
+        Counter.addSelection(this,bestOption.number - 1);
+
         return bestOption;
     }
 

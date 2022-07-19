@@ -5,11 +5,13 @@ import game.DoorController;
 import game.Game;
 import helper.Nudging;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class GameRunner {
     final Counter counter;
     final Nudging nudging;
+
+    final ArrayList<Agent> agents = new ArrayList();
 
     public GameRunner(Counter counter, Nudging nudging) {
         this.counter = counter;
@@ -17,21 +19,18 @@ public class GameRunner {
     }
 
     public void run(int inspection, int rounds) {
-        counter.clear();
+        Counter.clear();
 
-        final Memory mem = new Memory();
-        final Agent agent = new Agent(mem);
-        final DoorController doorController = new DoorController( counter, nudging);
-        final Game game = new Game(doorController, agent, counter);
+        for(int i = 0; i<3; i++) {
+            final Memory mem = new Memory();
+            final Agent agent = new Agent(i, mem);
+            agents.add(agent);
+
+        }
+
+        final DoorController doorController = new DoorController(nudging);
+        final Game game = new Game(doorController, agents, counter);
 
         game.start(inspection, rounds);
-
-        Arrays.stream(counter.doorSelection).forEach(System.out::println);
-        System.out.println();
-        Arrays.stream(counter.doorFrequency).forEach(System.out::println);
-        System.out.println();
-        counter.print();
-        System.out.println("-------------------------");
-
     }
 }
