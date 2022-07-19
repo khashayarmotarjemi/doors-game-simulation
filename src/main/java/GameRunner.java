@@ -3,6 +3,7 @@ import agent.Counter;
 import agent.Memory;
 import game.DoorController;
 import game.Game;
+import helper.Constants;
 import helper.Nudging;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class GameRunner {
     public void run(int inspection, int rounds) {
         Counter.clear();
 
-        for(int i = 0; i<3; i++) {
+        for(int i = 0; i< Constants.agentCount; i++) {
             final Memory mem = new Memory();
             final Agent agent = new Agent(i, mem);
             agents.add(agent);

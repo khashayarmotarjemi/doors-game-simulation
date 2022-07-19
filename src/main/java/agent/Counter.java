@@ -1,5 +1,7 @@
 package agent;
 
+import helper.Constants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,7 +43,7 @@ public class Counter {
         windowSelections.addAll(Arrays.asList(0, 0, 0));
         doorFrequency.addAll(Arrays.asList(0, 0, 0, 0, 0));
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < Constants.agentCount; i++) {
             doorSelection.put(i, new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0)));
         }
     }

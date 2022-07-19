@@ -4,9 +4,6 @@ import helper.FileManager;
 import helper.Nudging;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
 
@@ -14,18 +11,16 @@ public class Main {
         final Counter counter = new Counter();
         final Nudging nudging = new Nudging();
 
-        final ArrayList<ArrayList<Integer>> allResults = new ArrayList<>();
-
         final GameRunner runner = new GameRunner(counter, nudging);
 
-        nudging.updateProbs(6, 3);
+        nudging.updateWindowProbs(6, 3);
 
         for (int i = 0; i < 1; i++) {
             runner.run(10, 100);
         }
 
-        String json = new Gson().toJson(allResults);
-//        showPlot(json);
+        String json = new Gson().toJson(Counter.doorSelection);
+        showPlot(json);
         printCounter(counter);
 
     }

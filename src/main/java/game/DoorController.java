@@ -72,7 +72,6 @@ public class DoorController {
     private int pickByProbs(ArrayList<Double> probs) {
         double rnd = Math.random();
         int i = 0;
-//        double p = Math.random();
         double cumulativeProbability = 0.0;
         for (Double prob : probs) {
             cumulativeProbability += prob;
