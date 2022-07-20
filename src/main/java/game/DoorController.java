@@ -2,19 +2,18 @@ package game;
 
 import agent.Window;
 import agent.Counter;
-import helper.Nudging;
+import helper.WindowController;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoorController {
-    final private Nudging nudging;
+    final private WindowController nudging;
     Window window;
     private final Door[] allDoors;
     private final ArrayList<Window> windows = new ArrayList<>();
 
-    public DoorController(Nudging nudging) {
+    public DoorController(WindowController nudging) {
         this.nudging = nudging;
 
         allDoors = new Door[]{

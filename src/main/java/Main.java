@@ -1,27 +1,39 @@
 import agent.Counter;
 import com.google.gson.Gson;
+import game.DoorController;
 import helper.FileManager;
-import helper.Nudging;
+import helper.WindowController;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        final ArrayList<Map<Integer, ArrayList<Integer>>> result = new ArrayList<>();
+
         final Counter counter = new Counter();
-        final Nudging nudging = new Nudging();
+        final WindowController windowController1 = new WindowController();
+        final WindowController windowController2 = new WindowController();
 
-        final GameRunner runner = new GameRunner(counter, nudging);
+        final GameRunner runner = new GameRunner(counter, new ArrayList<>(List.of(windowController1, windowController2)));
 
-        nudging.updateWindowProbs(6, 3);
+        final ArrayList<Double> probs1 = new ArrayList<>(List.of(0.7, 0.2, 0.1));
+        final List<Double> probs2 = probs1.stream().map(e -> 1 - e).toList();
 
-        for (int i = 0; i < 1; i++) {
+        windowController1.updateWindowProbs(probs1);
+        windowController2.updateWindowProbs(new ArrayList<>(probs2));
+
+        for (int i = 0; i < 50; i++) {
             runner.run(10, 100);
+            result.add(Map.copyOf(Counter.doorSelection));
         }
 
-        String json = new Gson().toJson(Counter.doorSelection);
+        String json = new Gson().toJson(result);
         showPlot(json);
-        printCounter(counter);
 
     }
 
@@ -41,10 +53,6 @@ public class Main {
             System.out.println();
 
         });
-//        Counter.doorFrequency.forEach(System.out::println);
-//        System.out.println();
-//        counter.print();
-//        System.out.println("-------------------------");
     }
 }
 

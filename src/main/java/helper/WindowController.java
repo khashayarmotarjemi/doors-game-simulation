@@ -2,7 +2,7 @@ package helper;
 
 import java.util.ArrayList;
 
-public class Nudging {
+public class WindowController {
     public final ArrayList<Double> windowProbs = new ArrayList<>();
 
     public void updateWindowProbs(double k, double l) {

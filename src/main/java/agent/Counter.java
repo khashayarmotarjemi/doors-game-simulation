@@ -1,6 +1,7 @@
 package agent;
 
 import helper.Constants;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class Counter {
         windowSelections.set(index, windowSelections.get(index) + 1);
     }
 
-    public static void addSelection(Agent agent, int index) {
+    public static void addSelection(@NotNull Agent agent, int index) {
         final ArrayList<Integer> row = doorSelection.get(agent.id);
         row.set(index, row.get(index) + 1);
     }
