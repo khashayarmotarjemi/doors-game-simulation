@@ -1,6 +1,5 @@
 import agent.Counter;
 import com.google.gson.Gson;
-import game.DoorController;
 import helper.FileManager;
 import helper.WindowController;
 
@@ -27,7 +26,7 @@ public class Main {
         windowController1.updateWindowProbs(probs1);
         windowController2.updateWindowProbs(new ArrayList<>(probs2));
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 200; i++) {
             runner.run(10, 100);
             result.add(Map.copyOf(Counter.doorSelection));
         }
@@ -47,7 +46,7 @@ public class Main {
         }
     }
 
-    public static void printCounter(Counter counter) {
+    public static void printResult(Counter counter) {
         Counter.doorSelection.forEach((index, agent) -> {
             agent.forEach(System.out::println);
             System.out.println();
