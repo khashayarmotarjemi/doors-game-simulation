@@ -20,9 +20,10 @@ public class Game {
     public void start(int inspection, int rounds) {
 
         for (int round = 0; round < rounds; round++) {
-            for (int i = 0; i < Constants.agentCount; i++) {
-                final Agent agent = agents.get(i);
-                final DoorController doorController = doorCtrls.get(i);
+//            for (int i = 0; i < Constants.agentCount; i++) {
+                for(Agent agent: agents){
+//                final Agent agent = agents.get(i);
+                final DoorController doorController = doorCtrls.get(agents.indexOf(agent));
 
                 doorController.resetWindow();
                 final GameState state = doorController.getState();

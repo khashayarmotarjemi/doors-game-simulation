@@ -1,3 +1,5 @@
+package run;
+
 import agent.Agent;
 import agent.Counter;
 import agent.Memory;
@@ -24,13 +26,16 @@ public class GameRunner {
 
         Counter.clear();
 
-        for (int i = 0; i < Constants.agentCount; i++) {
+        int i =0;
+        for (WindowController windowController: windowControllers) {
             final Memory mem = new Memory();
             final Agent agent = new Agent(i, mem);
-            final DoorController doorController = new DoorController(windowControllers.get(i));
+            final DoorController doorController = new DoorController(windowController);
 
             agents.add(agent);
             doorControllers.add(doorController);
+
+            i++;
         }
 //        final Memory mem1 = new Memory();
 //        final Memory mem2 = new Memory();

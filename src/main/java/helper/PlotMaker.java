@@ -7,17 +7,15 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.util.Rotation;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.HistogramDataset;
 
 
-public class Plot extends JFrame {
+public class PlotMaker extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public Plot(int[] values) {
-        super("plot");
+    public PlotMaker(int[] values) {
+        super("run");
         // This will create the dataset
         HistogramDataset dataset = createDataset(values);
         // based on the dataset we create the chart

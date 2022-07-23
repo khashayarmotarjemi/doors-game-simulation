@@ -13,6 +13,7 @@ public class Counter {
     static public Map<Integer, ArrayList<Integer>> doorSelection = new HashMap<>();
     static public ArrayList<Integer> doorFrequency = new ArrayList<>();
 
+
     public Counter() {
         clear();
     }
