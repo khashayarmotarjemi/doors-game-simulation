@@ -1,10 +1,12 @@
 package agent;
 
-import game.Result;
-import game.Door;
+import agent.model.DoorList;
+import game.model.Result;
+import game.model.Door;
+import run.Counter;
 
 public class Agent {
-    final int id;
+    public final int id;
     private final Memory memory;
 
     public Agent(int id, Memory memory) {
@@ -16,7 +18,7 @@ public class Agent {
     public Door select() {
         Door bestOption = null;
 
-        for (Door door : memory.probWindow.doors) {
+        for (Door door : memory.doorList.doors) {
             if (bestOption == null) {
                 bestOption = door;
             } else {
@@ -31,12 +33,12 @@ public class Agent {
         return bestOption;
     }
 
-    public void reset(Window newWindow) {
+    public void reset(DoorList newWindow) {
         memory.reset(newWindow);
     }
 
     public Door randomSelect() {
-        return memory.probWindow.doors.get((int) (Math.random() * (3)));
+        return memory.doorList.doors.get((int) (Math.random() * (3)));
     }
 
     public void updateMemory(Result result) {

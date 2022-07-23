@@ -1,12 +1,10 @@
-package agent;
+package run;
 
-import helper.Constants;
+import agent.Agent;
+import agent.model.DoorList;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Counter {
     static public ArrayList<Integer> windowSelections = new ArrayList<>();
@@ -14,8 +12,8 @@ public class Counter {
     static public ArrayList<Integer> doorFrequency = new ArrayList<>();
 
 
-    public Counter() {
-        clear();
+    public Counter(int agentCount) {
+        clear(agentCount);
     }
 
     public static void addWindow(int index) {
@@ -27,17 +25,18 @@ public class Counter {
         row.set(index, row.get(index) + 1);
     }
 
-    public static void addDoorFreq(Window window) {
+    public static void addDoorFreq(DoorList window) {
         window.doors.forEach((door) -> {
             doorFrequency.set(door.number - 1, doorFrequency.get(door.number - 1) + 1);
         });
     }
 
+
     public void print() {
-        windowSelections.forEach(System.out::println);
+        doorSelection.values().stream().map(AbstractCollection::toString);
     }
 
-    public static void clear() {
+    public static void clear(int agentCount) {
         windowSelections.clear();
         doorSelection.clear();
         doorFrequency.clear();
@@ -45,7 +44,7 @@ public class Counter {
         windowSelections.addAll(Arrays.asList(0, 0, 0));
         doorFrequency.addAll(Arrays.asList(0, 0, 0, 0, 0));
 
-        for (int i = 0; i < Constants.agentCount; i++) {
+        for (int i = 0; i < agentCount; i++) {
             doorSelection.put(i, new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0)));
         }
     }

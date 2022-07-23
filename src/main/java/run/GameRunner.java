@@ -1,21 +1,19 @@
 package run;
 
 import agent.Agent;
-import agent.Counter;
 import agent.Memory;
 import game.DoorController;
 import game.Game;
-import helper.Constants;
-import helper.WindowController;
+import game.model.Window;
 
 import java.util.ArrayList;
 
 public class GameRunner {
     final Counter counter;
-    final ArrayList<WindowController> windowControllers;
+    final ArrayList<Window> windowControllers;
 
 
-    public GameRunner(Counter counter, ArrayList<WindowController> windowControllers) {
+    public GameRunner(Counter counter, ArrayList<Window> windowControllers) {
         this.counter = counter;
         this.windowControllers = windowControllers;
     }
@@ -24,10 +22,10 @@ public class GameRunner {
         final ArrayList<Agent> agents = new ArrayList<>();
         final ArrayList<DoorController> doorControllers = new ArrayList<>();
 
-        Counter.clear();
+        Counter.clear(windowControllers.size() );
 
         int i =0;
-        for (WindowController windowController: windowControllers) {
+        for (Window windowController: windowControllers) {
             final Memory mem = new Memory();
             final Agent agent = new Agent(i, mem);
             final DoorController doorController = new DoorController(windowController);
@@ -37,16 +35,7 @@ public class GameRunner {
 
             i++;
         }
-//        final Memory mem1 = new Memory();
-//        final Memory mem2 = new Memory();
-//        final Agent agent1 = new Agent(0,mem1);
-//        final Agent agent2 = new Agent(1,mem2);
-//
-//        agents.add(agent1);
-//        agents.add(agent2);
 
-
-//        final DoorController doorController = new DoorController(windowControllers);
         final Game game = new Game(doorControllers, agents, counter);
 
         game.start(inspection, rounds);

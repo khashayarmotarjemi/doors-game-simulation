@@ -1,19 +1,21 @@
 package game;
 
-import agent.Window;
-import agent.Counter;
-import helper.WindowController;
+import run.Counter;
+import agent.model.DoorList;
+import game.model.Door;
+import game.model.GameState;
+import game.model.Window;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoorController {
-    final private WindowController nudging;
-    Window window;
+    final private Window nudging;
+    DoorList window;
     private final Door[] allDoors;
-    private final ArrayList<Window> windows = new ArrayList<>();
+    private final ArrayList<DoorList> windows = new ArrayList<>();
 
-    public DoorController(WindowController nudging) {
+    public DoorController(Window nudging) {
         this.nudging = nudging;
 
         allDoors = new Door[]{
@@ -25,14 +27,14 @@ public class DoorController {
         };
 
         // 3, 4, 5
-        windows.add(new Window(new ArrayList<>(List.of(allDoors[2], allDoors[3], allDoors[4]))));
+        windows.add(new DoorList(new ArrayList<>(List.of(allDoors[2], allDoors[3], allDoors[4]))));
 
         // 1,2, 3|5
-        windows.add(new Window(new ArrayList<>(List.of(allDoors[0], allDoors[1], allDoors[2]))));
-        windows.add(new Window(new ArrayList<>(List.of(allDoors[0], allDoors[1], allDoors[4]))));
+        windows.add(new DoorList(new ArrayList<>(List.of(allDoors[0], allDoors[1], allDoors[2]))));
+        windows.add(new DoorList(new ArrayList<>(List.of(allDoors[0], allDoors[1], allDoors[4]))));
 
         // 1,2,4
-        windows.add(new Window(new ArrayList<>(List.of(allDoors[0], allDoors[1], allDoors[3]))));
+        windows.add(new DoorList(new ArrayList<>(List.of(allDoors[0], allDoors[1], allDoors[3]))));
 
         resetWindow();
     }

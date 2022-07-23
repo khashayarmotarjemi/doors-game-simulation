@@ -1,8 +1,10 @@
 package game;
 
 import agent.Agent;
-import agent.Counter;
-import helper.Constants;
+import run.Counter;
+import game.model.Door;
+import game.model.GameState;
+import game.model.Result;
 
 import java.util.ArrayList;
 
@@ -20,9 +22,8 @@ public class Game {
     public void start(int inspection, int rounds) {
 
         for (int round = 0; round < rounds; round++) {
-//            for (int i = 0; i < Constants.agentCount; i++) {
-                for(Agent agent: agents){
-//                final Agent agent = agents.get(i);
+            for (Agent agent : agents) {
+
                 final DoorController doorController = doorCtrls.get(agents.indexOf(agent));
 
                 doorController.resetWindow();

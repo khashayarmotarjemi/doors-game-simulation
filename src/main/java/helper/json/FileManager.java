@@ -1,8 +1,5 @@
 package helper.json;
 
-import org.jfree.data.json.impl.JSONObject;
-
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 

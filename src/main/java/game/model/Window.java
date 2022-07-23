@@ -1,8 +1,8 @@
-package helper;
+package game.model;
 
 import java.util.ArrayList;
 
-public class WindowController {
+public class Window {
     public final ArrayList<Double> windowProbs = new ArrayList<>();
 
     public void updateWindowProbs(double k, double l) {
@@ -17,8 +17,8 @@ public class WindowController {
     }
 
     public void updateWindowProbs(ArrayList<Double> probs) {
-      windowProbs.clear();
-      windowProbs.addAll(probs);
+        windowProbs.clear();
+        windowProbs.addAll(probs);
     }
 
 }

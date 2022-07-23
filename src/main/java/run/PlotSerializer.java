@@ -2,6 +2,7 @@ package run;
 
 import com.google.gson.Gson;
 import helper.json.FileManager;
+import run.model.Plot;
 
 public class PlotSerializer {
     public boolean saveToFile(Plot plot) {

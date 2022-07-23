@@ -1,4 +1,4 @@
-package run;
+package run.model;
 
 import java.util.ArrayList;
 import java.util.List;

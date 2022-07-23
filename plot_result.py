@@ -9,7 +9,7 @@ fig, ax = plt.subplots()
 
 for agent in data["results"]:
     res = list(map(lambda e: sum(e[0:2]), agent["results"]))
-    ax.plot(res, label=agent['agentId'])
+    ax.plot(res, label=f'agent: {agent["agentId"]}')
    
       
 plt.ylim([0,80])

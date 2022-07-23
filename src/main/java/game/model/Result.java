@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 public class Result {
     public final boolean won;
